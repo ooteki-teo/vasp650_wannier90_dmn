@@ -1,0 +1,41 @@
+SYSTEM = TaAs SOC SAWF
+ENCUT = 350
+PREC = Accurate
+LASPH = .TRUE.
+LREAL = .FALSE.
+LSORBIT = .TRUE.
+ISYM = 2
+MAGMOM = 12*0
+ISMEAR = 0
+SIGMA = 0.05
+EDIFF = 1E-8
+ALGO = Normal
+NBANDS = 56
+KPAR = 4
+GGA_COMPAT = .FALSE.
+ISTART = 1
+ICHARG = 11
+LWAVE = .FALSE.
+LCHARG = .FALSE.
+NUM_WANN = 32
+LWANNIER90 = .TRUE.
+LWRITE_DMN = .TRUE.
+WANNIER90_WIN = "
+site_symmetry = .true.
+spinors = .true.
+write_hr = .true.
+exclude_bands = 1-4
+num_iter = 200
+conv_tol = 1e-8
+conv_window = 10
+dis_num_iter = 230
+symmetrize_eps = 1e-10
+dis_conv_tol = 1e-6
+dis_conv_window = 5
+dis_mix_ratio = 0.5
+dis_win_max = 16.5
+begin projections
+Ta:d
+As:p
+end projections
+"

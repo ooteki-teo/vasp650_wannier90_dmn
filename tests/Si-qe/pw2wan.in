@@ -1,0 +1,3 @@
+&INPUTPP
+ prefix='Si', outdir='./work', seedname='Si', write_dmn=.true.
+/

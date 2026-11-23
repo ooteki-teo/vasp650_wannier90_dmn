@@ -1,0 +1,178 @@
+{
+  "src/.objects": {
+    "source_sha256": "cfcf27e80a30c983193f9a8ad41c8f2b9f37c3a2286c12244d3c690a21bf3b13",
+    "patched_sha256": "f317b5ce4e460bd2892a085a89ab0f224b1785c63660085a260ff641c3443b3e",
+    "edits": [
+      {
+        "offset": 3604,
+        "delete": 0,
+        "add": "\twave_rotator.o \\\n"
+      },
+      {
+        "offset": 4134,
+        "delete": 18,
+        "add": ""
+      }
+    ]
+  },
+  "src/locproj.F": {
+    "source_sha256": "b0bffc116daec99648a90980e7d34b198edf54dda202822864df964ff25b2276",
+    "patched_sha256": "18536d05587ea50fddb6336722bd4412b3d48a5093f0978304d88f4143bf33e0",
+    "edits": [
+      {
+        "offset": 881,
+        "delete": 0,
+        "add": "             WANNIER90_ORBITAL_DEFINITIONS, SETROTYLM, &\n"
+      }
+    ]
+  },
+  "src/main.F": {
+    "source_sha256": "aa262584459dbafe06fd396c5cfeb374d790da7f96ce18b9de269a4515841e91",
+    "patched_sha256": "801731c7a2e05bc716b0ec60e233d6fd119bf76eee40943f6a14ed9c5c47856b",
+    "edits": [
+      {
+        "offset": 144605,
+        "delete": 0,
+        "add": ",SYMM=SYMM"
+      },
+      {
+        "offset": 250950,
+        "delete": 0,
+        "add": ",SYMM=SYMM"
+      }
+    ]
+  },
+  "src/mlwf.F": {
+    "source_sha256": "5ff0ae03273b1bc149bd4c9be7a5912bc35ba521cf4dde119ef1956e1a09f14d",
+    "patched_sha256": "090e39a661bd6e9be2e9a5531d0d8052d5cf88cb5b7aee59b487c5778e6df1ce",
+    "edits": [
+      {
+        "offset": 5741,
+        "delete": 0,
+        "add": "   !> write site-symmetry matrices for standalone Wannier90\n   LOGICAL, PRIVATE, SAVE :: WRITE_DMN=.FALSE.\n   PRIVATE :: MLWF_WANNIER90_DMN, MLWF_DMN_ORBITALS\n"
+      },
+      {
+        "offset": 17045,
+        "delete": 0,
+        "add": "   CALL PROCESS_INCAR(LOPEN, IU0, IU5, 'LWRITE_DMN', WRITE_DMN, IERR, WRITEXMLINCAR)\n   IF (WRITE_DMN.AND.(.NOT.LWANNIER90.OR.LWANNIER90_RUN.OR..NOT.WRITE_MMN_AMN)) &\n      CALL vtutor%error('LWRITE_DMN requires LWANNIER90 and LWRITE_MMN_AMN, with LWANNIER90_RUN disabled.')\n\n"
+      },
+      {
+        "offset": 20007,
+        "delete": 0,
+        "add": ",SYMM"
+      },
+      {
+        "offset": 20582,
+        "delete": 0,
+        "add": "   TYPE(symmetry),OPTIONAL,INTENT(IN) :: SYMM\n"
+      },
+      {
+        "offset": 22792,
+        "delete": 0,
+        "add": "   IF (WRITE_DMN) THEN\n      IF (.NOT.PRESENT(SYMM).OR.MY_LWANNIER90_RUN) &\n         CALL vtutor%error('LWRITE_DMN requires the standalone Wannier90 export from the VASP main driver.')\n      IF (P_MLWF%PROJ_MODE/=PROJ_WANNIER90) &\n         CALL vtutor%error('LWRITE_DMN requires explicit projections in the Wannier90 input.')\n      CALL MLWF_WANNIER90_DMN(P_MLWF,W,P,CQIJ,T_INFO,LATT_CUR,SYMM,IO)\n   ENDIF\n"
+      },
+      {
+        "offset": 46830,
+        "delete": 0,
+        "add": "   IF (WRITE_DMN.AND.ESTIMATED_NUM_WANN/=MLWF%NUM_WANN) &\n      CALL vtutor%error('LWRITE_DMN requires exactly NUM_WANN explicit Wannier90 projections.')\n"
+      },
+      {
+        "offset": 47779,
+        "delete": 0,
+        "add": "      ! The cell label of a projection fixes its symmetry phase.\n      IF (WRITE_DMN) MLWF%LPRJ_functions(IS)%R=proj_site(:,IS)\n"
+      },
+      {
+        "offset": 49285,
+        "delete": 0,
+        "include": "dmn_routines.F.inc",
+        "add": "\n"
+      },
+      {
+        "offset": 69678,
+        "delete": 0,
+        "add": ", ISP_IRZ"
+      },
+      {
+        "offset": 70466,
+        "delete": 0,
+        "add": "          ISP_IRZ=ISP\n          IF (WRITE_DMN.AND.MLWF%ISPIN==2) THEN\n             IF (KPOINTS_FULL%SPINFLIP(NKI)==1) ISP_IRZ=3-ISP\n          ENDIF\n"
+      },
+      {
+        "offset": 70640,
+        "delete": 0,
+        "add": "_IRZ"
+      },
+      {
+        "offset": 70746,
+        "delete": 0,
+        "add": "_IRZ"
+      }
+    ]
+  },
+  "src/wave_rotator.F": {
+    "source_sha256": "3c907493502d1cd6af79217049df53ed42bc63fff8f256281b6b6874f5d4b105",
+    "patched_sha256": "f57c4139e7b7489f3efc2459064812ca416ce4ceec1888698fb869ca8b6fa1d1",
+    "edits": [
+      {
+        "offset": 8936,
+        "delete": 0,
+        "add": ",full_bloch"
+      },
+      {
+        "offset": 9360,
+        "delete": 0,
+        "add": "        logical,optional,intent(in) :: full_bloch !< Include reciprocal folding and the Bloch translation phase\n"
+      },
+      {
+        "offset": 9743,
+        "delete": 0,
+        "add": ", gshift(3)"
+      },
+      {
+        "offset": 9796,
+        "delete": 0,
+        "add": ", kphase, dk(3)"
+      },
+      {
+        "offset": 11454,
+        "delete": 0,
+        "add": "        gshift=0\n        kphase=0._q\n        if (present(full_bloch)) then\n            if (full_bloch) then\n                dk=matmul(wa_original%wdes1%vkpt,rot)-wa_rotated%wdes1%vkpt\n                gshift=nint(dk)\n                if (maxval(abs(dk-gshift))>1e-5_q) &\n                    call vtutor%error(\"wave_rotator: destination k must equal rotated k modulo a reciprocal vector\")\n                kphase=-tpi*dot_product(wa_rotated%wdes1%vkpt,self%gtrans(:,abs_irot))\n            endif\n        endif\n"
+      },
+      {
+        "offset": 11720,
+        "delete": 0,
+        "add": "gshift(1)+"
+      },
+      {
+        "offset": 11778,
+        "delete": 0,
+        "add": "gshift(2)+"
+      },
+      {
+        "offset": 11836,
+        "delete": 0,
+        "add": "gshift(3)+"
+      },
+      {
+        "offset": 12386,
+        "delete": 0,
+        "add": "kphase"
+      },
+      {
+        "offset": 17036,
+        "delete": 0,
+        "add": "        type(wavedes1),target :: wdes_original\n"
+      },
+      {
+        "offset": 17273,
+        "delete": 0,
+        "add": "        wdes_original=wa_original%wdes1\n        wdes_original%nk=abs_irot\n"
+      },
+      {
+        "offset": 17442,
+        "delete": 12,
+        "add": "=>wdes_original"
+      }
+    ]
+  }
+}

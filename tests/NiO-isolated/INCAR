@@ -1,0 +1,36 @@
+SYSTEM = NiO AFM-II PBE+U
+ENCUT = 420
+PREC = Accurate
+ISYM = 2
+ISPIN = 2
+MAGMOM = 2 -2 0 0
+LREAL = .FALSE.
+EDIFF = 1E-8
+ISMEAR = 0
+SIGMA = 0.05
+AMIX = 0.2
+BMIX = 0.00001
+LDAU = .TRUE.
+LDAUTYPE = 2
+LDAUL = 2 -1
+LDAUU = 8 0
+LDAUJ = 0.95 0
+LMAXMIX = 4
+NBANDS = 40
+NUM_WANN = 2
+LWAVE = .FALSE.
+LCHARG = .FALSE.
+LWANNIER90 = .TRUE.
+LWRITE_DMN = .TRUE.
+WANNIER90_WIN = "
+site_symmetry = .true.
+guiding_centres = .true.
+write_hr = .true.
+num_iter = 100
+exclude_bands = 3-40
+conv_tol = 1e-10
+conv_window = 5
+begin projections
+O:s
+end projections
+"
